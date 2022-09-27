@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="Container"></div>
+    <script type="text/babel">
+
+
+        // const domContaier = document.getElementById('root')
+        // const root = ReactDOM.createRoot(domContaier)
+
+        // function Clock(props) {
+        //     return (
+        //         <div>
+        //             <h1>Hello world!</h1>
+        //             <h2>It is {props.date.toLocaleTimeString()}</h2>
+        //         </div>
+        //     )
+        // }
+
+
+        // // tick
+        // function tick() {
+
+        //     root.render(<Clock date={new Date()} />)
+        // }
+        // setInterval(tick, 1000)
+
+        function Avatar(props) {
+
+            return (
+                <img className="Avatar"
+                    src={props.user.avatarUrl}
+                    alt={props.user.name}
+                />)
+        }
+
+        function UserInfo(props) {
+            return (
+                <div className="UserInfo">
+                    <Avatar user={props.user} />
+                    <div className="UserInfo-name">
+                        {props.user.name}
+                    </div>
+                </div>
+            )
+
+        }
+
+        function Comment(props) {
+            return (
+                <div className="Comment">
+                    <UserInfo user={props.author} />
+                    <div className="Comment-text">
+                        {props.text}
+                    </div>
+                    <div className="Comment-date">
+                        {props.date}
+                    </div>
+                </div>
+            )
+        }
+        const author = {
+            avatarUrl: 'https://files.fullstack.edu.vn/f8-prod/blog_posts/3796/62a83eb1bb7d9.jpg',
+            name: 'son'
+        }
+        const root = ReactDOM.createRoot(document.getElementById('Container'))
+        root.render(<Comment
+            author={author}
+            text='Text message'
+            data='11:30'
+        />)
+
+    </script>
+</body>
+
+</html>
