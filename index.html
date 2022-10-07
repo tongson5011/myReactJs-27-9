@@ -14,75 +14,35 @@
 <body>
     <div id="Container"></div>
     <script type="text/babel">
-
         const root = ReactDOM.createRoot(document.getElementById('Container'))
-        function UserGreeting(props) {
-            return (
-                <h2>Welcome Back</h2>
-            )
-        }
-        function GuestGreeting(props) {
-            return (
-                <h2> Please sign in</h2>
-            )
-        }
-
-        function Greeting(props) {
-            const isLoggedIn = props.isLoggedIn
-            if (isLoggedIn) {
-                return <UserGreeting />
-            } else {
-                return <GuestGreeting />
-            }
-        }
-
-        function LoginButton(props) {
-            return (
-                <button onClick={props.onClick}>Login</button>
-            )
-        }
-
-        function LogoutButton(props) {
-            return (
-                <button onClick={props.onClick}>LogOut</button>
-            )
-        }
-
-        class LoginControl extends React.Component {
+        class NameForm extends React.Component {
             constructor(props) {
                 super(props)
-                this.handleLoginClick = this.handleLoginClick.bind(this)
-                this.handleLogoutClick = this.handleLogoutClick.bind(this)
-                this.state = { isLoggedIn: false }
+                this.handleChange = this.handleChange.bind(this)
+                this.handleSubmit = this.handleSubmit.bind(this)
+                this.state = { 'value': '' }
             }
 
-            handleLoginClick() {
-                this.setState({ isLoggedIn: true })
+            handleChange(e) {
+                this.setState({ 'value': e.target.value })
             }
-            handleLogoutClick() {
-                this.setState({ isLoggedIn: false })
+            handleSubmit() {
+                alert('A name was submited: ' + this.state.value)
+                e.preventDefault()
             }
-
             render() {
-                const isLoggedIn = this.state.isLoggedIn
-                let button
-
-                if (isLoggedIn) {
-                    button = <LogoutButton onClick={this.handleLogoutClick} />
-                } else {
-                    button = <LoginButton onClick={this.handleLoginClick} />
-                }
-
                 return (
-                    <div>
-                        <Greeting isLoggedIn={isLoggedIn} />
-                        {button}
-                    </div>
+                    <form onSubmit={this.handleSubmit}>
+                        <label>
+                            Name:
+                            <input type="text" value={this.state.value} onChange={this.handleChange} />
+                        </label>
+                        <input type="submit" />
+                    </form>
                 )
-
             }
         }
-        root.render(<LoginControl />)
+        root.render(<NameForm />)
     </script>
 </body>
 
